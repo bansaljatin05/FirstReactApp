@@ -2,11 +2,28 @@ import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+
+function RenderLeader({name, image, desg, desc}) {
+
+    return(
+        <Media className="mt-3">
+            <Media left middle className="ml-1">
+                <Media object src={image} alt={name}/>
+            </Media>
+            <Media body className="ml-5">
+                <Media heading>{name}</Media>
+                <h6>{desg}</h6>
+                <p>{desc}</p>
+            </Media>
+        </Media>
+    );
+}
+
 function About(props) {
 
     const leaders = props.leaders.map((leader) => {
         return (
-            <p>Leader {leader.name}</p>
+            <RenderLeader name={leader.name} image={leader.image} desg={leader.designation} desc={leader.description} />
         );
     });
 
@@ -65,7 +82,7 @@ function About(props) {
                     <h2>Corporate Leadership</h2>
                 </div>
                 <div className="col-12">
-                    <Media list>
+                    <Media list className="mt-2">
                         {leaders}
                     </Media>
                 </div>
