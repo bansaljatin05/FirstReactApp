@@ -23,13 +23,13 @@ class Contact extends Component {
             } 
         }
 
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleBlur = this.handleBlur.bind(this);
-        this.validate = this.validate.bind(this);
+        //this.handleSubmit = this.handleSubmit.bind(this);
+        //this.handleInputChange = this.handleInputChange.bind(this);
+        //this.handleBlur = this.handleBlur.bind(this);
+        //this.validate = this.validate.bind(this);
     }
 
-    handleInputChange(event) {
+    handleInputChange = (event) => {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
@@ -39,7 +39,7 @@ class Contact extends Component {
         })
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         console.log("CurrentState: "+JSON.stringify(this.state));
         alert("CurrentState: "+JSON.stringify(this.state));
         event.preventDefault();
@@ -51,7 +51,7 @@ class Contact extends Component {
         });
     }
 
-    validate(firstname, lastname, telnum, email) {
+    validate = (firstname, lastname, telnum, email) => {
         const errors = {
             firstname: '',
             lastname:  '',
@@ -134,8 +134,8 @@ class Contact extends Component {
                                     <Input type="text" id="firstname" 
                                     name="firstname" placeholder="First Name" 
                                     value={this.state.firstname} 
-                                    valid={errors.firstname == ''}
-                                    invalid={errors.firstname != ''}
+                                    valid={errors.firstname === ''}
+                                    invalid={errors.firstname !== ''}
                                     onChange={this.handleInputChange} 
                                     onBlur={this.handleBlur('firstname')}/>
                                     <FormFeedback>{errors.firstname}</FormFeedback>
@@ -147,8 +147,8 @@ class Contact extends Component {
                                     <Input type="text" id="lastname" 
                                     name="lastname" placeholder="Last Name" 
                                     value={this.state.lastname} onChange={this.handleInputChange}
-                                    valid={errors.lastname == ''}
-                                    invalid={errors.lastname != ''} 
+                                    valid={errors.lastname === ''}
+                                    invalid={errors.lastname !== ''} 
                                     onBlur={this.handleBlur('lastname')}/>
                                     <FormFeedback>{errors.lastname}</FormFeedback>
                                 </Col>
@@ -159,8 +159,8 @@ class Contact extends Component {
                                     <Input type="tel" id="telnum" 
                                     name="telnum" placeholder="Tel No." 
                                     value={this.state.telnum} onChange={this.handleInputChange} 
-                                    valid={errors.telnum == ''}
-                                    invalid={errors.telnum != ''}
+                                    valid={errors.telnum === ''}
+                                    invalid={errors.telnum !== ''}
                                     onBlur={this.handleBlur('telnum')}/>
                                     <FormFeedback>{errors.telnum}</FormFeedback>
                                 </Col>
@@ -171,8 +171,8 @@ class Contact extends Component {
                                     <Input type="email" id="email" 
                                     name="email" placeholder="Email" 
                                     value={this.state.email} onChange={this.handleInputChange} 
-                                    valid={errors.email == ''}
-                                    invalid={errors.email != ''}
+                                    valid={errors.email === ''}
+                                    invalid={errors.email !== ''}
                                     onBlur={this.handleBlur('email')}/>
                                     <FormFeedback>{errors.email}</FormFeedback>
                                 </Col>
