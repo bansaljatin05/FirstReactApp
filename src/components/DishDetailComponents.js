@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import { LocalForm, Control, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { postComment } from '../redux/ActionCreators';
 
 
 const required = (val) => val && val.length;
@@ -27,7 +28,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
         }
 
         handleSubmit = (values) => {
-            this.props.addComment(this.props.dishId, values.rating, values.yourname, values.comment);
+            this.props.postComment(this.props.dishId, values.rating, values.yourname, values.comment);
         }
 
         render() {
@@ -114,7 +115,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
             return (<div></div>);
         }
    }
-    function RenderComments({comments, addComment, dishId}) {
+    function RenderComments({comments, postComment, dishId}) {
         
         if(comments != null) {
             return (
@@ -132,7 +133,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
                             })
                         }
                     </ul>
-                    <CommentForm dishId={dishId} addComment={addComment}/>
+                    <CommentForm dishId={dishId} postComment={postComment}/>
                 </div>
                 
             );
@@ -174,7 +175,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
                     </div>
                     <div className="row">
                         <Renderdish dish = {props.dish}/>
-                        <RenderComments comments = {props.comments} addComment={props.addComment} dishId={props.dish.id}/>
+                        <RenderComments comments = {props.comments} postComment={props.postComment} dishId={props.dish.id}/>
                     </div>
                 </div>
             );
