@@ -1,7 +1,8 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 function RenderLeader({name, image, desg, desc}) {
 
@@ -21,11 +22,18 @@ function RenderLeader({name, image, desg, desc}) {
 
 function About(props) {
 
-    const leaders = props.leaders.map((leader) => {
-        return (
-            <RenderLeader name={leader.name} image={leader.image} desg={leader.designation} desc={leader.description} />
-        );
-    });
+    let leaders = null;
+    if(props.leaders.isLoading) {
+        leaders = (<Loading/>);
+    } else if(props.leaders.errMess) leaders = (<h4>{props.leaders.errMess}</h4>)
+    else {
+        leaders = props.leaders.leaders.map((leader) => {
+            return (
+                <RenderLeader name={leader.name} image={baseUrl + leader.image} desg={leader.designation} desc={leader.description} />
+            );
+        });
+    }
+    
 
     return(
         <div className="container">
